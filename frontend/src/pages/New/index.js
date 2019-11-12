@@ -6,12 +6,12 @@ import {
     Btn
 } from '../../styles';
 import {
-    LabelThumbnail, InputThumbnail
+    LabelThumbnail, InputThumbnail, Img
 } from './styles'
 
 import camera from '../../assets/camera.svg'
 
-export default function New( { history} ) {
+export default function New( { history } ) {
     const [thumbnail, setThumbnail] = useState(null);
     const [company, setCompany] = useState('');
     const [techs, setTechs] = useState('');
@@ -32,7 +32,7 @@ export default function New( { history} ) {
         data.append('techs', techs);
         data.append('price', price);
 
-        api.post('/spots', data, {
+        await api.post('/spots', data, {
             headers: { user_id }
         });
 
@@ -42,9 +42,12 @@ export default function New( { history} ) {
     return (
             <Form onSubmit={handleSubmit}>
                 
-                <LabelThumbnail id="thumbnail" style={{ backgroundImage: `url(${preview})` }}>
+                <LabelThumbnail 
+                id="thumbnail" 
+                style={{ backgroundImage: `url(${preview})` }} 
+                image={thumbnail ? 'hasThumbnail' : ''}>
                     <InputThumbnail type="file" onChange={event => setThumbnail(event.target.files[0])} />
-                    <img src={camera} alt="Select img" />
+                    <Img src={camera} alt="Select img" image={thumbnail ? 'hasThumbnail' : ''}/>
                 </LabelThumbnail>
 
                 <FormLabel htmlFor='company'>EMPRESA *</FormLabel>

@@ -9,8 +9,15 @@ export const LabelThumbnail  = styled.label`
     height: 160px;
     justify-content: center;
     align-items: center;
+    ${props => props.image == 'hasThumbnail'
+   && "border: 0;"}
 `   
 
 export const InputThumbnail = styled.input`
     display: none;
+`
+
+export const Img = styled.img`
+    ${props => props.image == 'hasThumbnail'
+   && "display: none;"}
 `
